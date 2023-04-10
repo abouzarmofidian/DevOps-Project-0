@@ -23,3 +23,5 @@ http_port = "80"
 # SSH Key
 key_name  = "auth_key"
 key_value = "ssh"
+linux2_ami = "aa"
+micro_instance = "t2.micro"

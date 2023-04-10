@@ -391,3 +391,18 @@ terraform {
     region = "eu-central-1"
   }
 }
+
+# Creating the Jenkins instance
+resource "aws_instance" "Jenkins" {
+  ami = var.linux2_ami
+  instance_type = var.micro_instance
+  availability_zone = var.availability_zone
+  subnet_id = aws_subnet.public_subnet1.id
+  key_name = var.key_name
+  vpc_security_group_ids = [aws_security_group.jenkins_sg.id]
+  user_data = file("jenkins_install.sh")
+
+  tags = {
+    Name = "Jenkins"
+  }
+}
