@@ -406,3 +406,18 @@ resource "aws_instance" "Jenkins" {
     Name = "Jenkins"
   }
 }
+
+# Creating the Ansible instance
+resource "aws_instance" "Ansible" {
+  ami = var.linux2_ami
+  instance_type = var.micro_instance
+  availability_zone = var.availability_zone
+  subnet_id = aws_subnet.public_subnet1.id
+  key_name = var.key_name
+  vpc_security_group_ids = [aws_security_group.ansible_sg.id]
+  user_data = file("ansible_install.sh")
+
+  tags = {
+    Name = "Ansible"
+  }
+}
